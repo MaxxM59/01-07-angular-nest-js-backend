@@ -30,10 +30,16 @@ export class UsersService {
     //
     // Creation Validator for unique email
     private async validateCreateUserData(createUserData: CreateUserInput) {
+        let found = true;
         try {
             await this.usersRepository.findOne({ email: createUserData.email });
-            throw new UnprocessableEntityException('This email already exists !');
-        } catch (error) {}
+        } catch (err) {
+            found = false;
+        }
+
+        if (found) {
+            throw new UnprocessableEntityException('Email already exists.');
+        }
     }
     // Convert document to a model
     private toModel(userDocument: UserDocument): User {
