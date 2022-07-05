@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -16,6 +17,8 @@ import { DatabaseModule } from './database/database.module';
             validationSchema: Joi.object({
                 PORT: Joi.number().required(),
                 MONGODB_URI: Joi.string().required(),
+                JWT_EXPIRATION: Joi.number().required(),
+                JWT_SECRET: Joi.string().required(),
             }),
         }),
         // GraphQL setup
@@ -25,6 +28,7 @@ import { DatabaseModule } from './database/database.module';
         }),
         UsersModule,
         DatabaseModule,
+        AuthModule,
     ],
     controllers: [AppController],
     providers: [AppService],
