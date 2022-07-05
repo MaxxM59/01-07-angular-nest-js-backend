@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
+import { BookmarksModule } from './Bookmarks/Bookmarks.module';
 
 @Module({
     imports: [
@@ -29,6 +30,7 @@ import { AuthModule } from './auth/auth.module';
         UsersModule,
         DatabaseModule,
         AuthModule,
+        BookmarksModule,
     ],
     controllers: [AppController],
     providers: [AppService],
