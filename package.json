@@ -38,6 +38,7 @@
     "cookies-parser": "^1.2.0",
     "graphql": "^16.5.0",
     "joi": "^17.6.0",
+    "link-preview-js": "^2.1.19",
     "mongoose": "^6.4.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { BookmarksResolver } from './Bookmarks.resolver';
-import { BookmarksService } from './Bookmarks.service';
-import { BookmarksRepository } from './Bookmarks.repository';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BookmarkSchema } from './models/Bookmark.schema';
-import { Bookmark } from './models/Bookmark.model';
+import { BookmarksRepository } from './bookmarks.repository';
+import { BookmarksResolver } from './bookmarks.resolver';
+import { BookmarksService } from './bookmarks.service';
+import { Bookmark } from './models/bookmark.model';
+import { BookmarkSchema } from './models/bookmark.schema';
+
 @Module({
     imports: [
         MongooseModule.forFeature([

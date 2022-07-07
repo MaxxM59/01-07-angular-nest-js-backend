@@ -1,27 +1,60 @@
 import { Injectable } from '@nestjs/common';
-import { BookmarksRepository } from './Bookmarks.repository';
-import { CreateBookmarkInput } from './dto/input/create-Bookmark-input.dto';
-import { BookmarkDocument } from './models/Bookmark.schema';
+import { BookmarksRepository } from './bookmarks.repository';
+import { CreateBookmarkInput } from './dto/input/create-bookmark-input.dto';
+import { BookmarkDocument } from './models/bookmark.schema';
+import { GetBookmarkArgs } from './dto/args/get-bookmark-args.dto';
+import { UpdateBookmarkInput } from './dto/input/update-bookmark-input.dto';
+import { User } from 'src/users/models/user.model';
 
 @Injectable()
 export class BookmarksService {
-    constructor(private readonly BookmarksRepository: BookmarksRepository) {}
+    constructor(private readonly bookmarksRepository: BookmarksRepository) {}
+    // Bookmarks CRUD Operations
+    //
+    // Create bookmark
     async createBookmark(
         createBookmarkData: CreateBookmarkInput,
         userId: string
     ) {
-        const BookmarkDocument = await this.BookmarksRepository.create({
+        const bookmarkDocument = await this.bookmarksRepository.create({
             ...createBookmarkData,
             links: [],
             userId,
         });
-        return this.toModel(BookmarkDocument);
+        return this.toModel(bookmarkDocument);
     }
-
-    private toModel(BookmarkDocument: BookmarkDocument) {
+    // Update bookmark
+    async updateBookmark(
+        updateBookmarkData: UpdateBookmarkInput,
+        userId: string
+    ) {
+        const bookmarkDocument =
+            await this.bookmarksRepository.findOneAndUpdate(
+                { _id: updateBookmarkData._id, userId },
+                updateBookmarkData
+            );
+        return this.toModel(bookmarkDocument);
+    }
+    // Get all
+    async getBookmarks(userId: string) {
+        const bookmarkDocuments = await this.bookmarksRepository.find({
+            userId,
+        });
+        return bookmarkDocuments.map((bookmark) => this.toModel(bookmark));
+    }
+    // Get one
+    async getBookmark(getBookmarkArgs: GetBookmarkArgs, userId: string) {
+        const bookmarkDocument = await this.bookmarksRepository.findOne({
+            ...getBookmarkArgs,
+            userId,
+        });
+        return this.toModel(bookmarkDocument);
+    }
+    // Utility functions
+    private toModel(bookmarkDocument: BookmarkDocument) {
         return {
-            i: BookmarkDocument._id.toHexString(),
-            ...BookmarkDocument,
+            _id: bookmarkDocument._id.toHexString(),
+            ...bookmarkDocument,
         };
     }
 }

@@ -1,5 +1,5 @@
 -   // ^^^^^^^^^^^^^^^^^^^^^^
--   // GO BACK TO 1' 35'' => LOGIN NOT WORKING
+-   // GO BACK TO 1' 56''
 -   // npm start
 -   // ns -o
 -   // npm run generate //
