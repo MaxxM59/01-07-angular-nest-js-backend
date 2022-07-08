@@ -1,4 +1,4 @@
--   NestJs backend for a bookmark application.
+-   NestJs/GraphQL backend for a bookmark application.
 -   It's supposed to run with the related UI at
     https://github.com/MaxxM59/01-07-Angular-NestJS-frontend
 
